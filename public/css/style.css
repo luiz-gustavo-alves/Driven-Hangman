@@ -1,8 +1,78 @@
+/* Importando fonte: Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
+
 * {
+
     box-sizing: border-box;
 }
 
 body {
 
-    background-color: red;
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFFFFF;
+}
+
+.hangman-status {
+
+    margin: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hangman-status img {
+
+    width: 400px;
+    height: 400px;
+}
+
+.start-game button {
+
+    width: 225px;
+    height: 60px;
+    background: #27AE60;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.keyboard {
+    
+    width: 650px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.key {
+
+    width: 40px;
+    height: 40px;  
+    font-weight: 700;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #E1ECF4;
+    border: 1px solid #7AA7C7;
+    color: #7AA7C7;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.key:hover {
+    
+    color: #9ab2c3;
+    background: #e6ebef;
+}
+
+.disabled {
+
+    background: #9FAAB5;
+    border: 1px solid #4F779E;
+    color: #4F779E;
+    cursor: not-allowed;
 }
