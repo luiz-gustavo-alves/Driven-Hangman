@@ -1,21 +1,29 @@
 function Letra(props) {
 
+    const usedLetter = props.usedLetter;
+
+    function getUsedLetters(letra) {
+        props.setUsedLetter([...usedLetter, letra]);
+    }
+
     const letra = props.letra;
+    const isDisabled = props.usedLetter.includes(letra) ? true : false;
+    const keyClass = isDisabled ? "key disabled" : "key"; 
+
     return (
         <li>
-            <button className="key" disabled>{letra}</button>
+            <button type="button" className={keyClass} disabled={isDisabled} onClick={() => getUsedLetters(letra)}>{letra}</button>
         </li>
     );
 }
 
-export default function Letras() {
+export default function Letras(props) {
 
-    const alfabeto = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-                      "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    const alfabeto = props.alfabeto;
 
     return (
         <ul className="keyboard">
-            {alfabeto.map(letra => < Letra key={letra} letra={letra}/>) }
+            {alfabeto.map((letra, index) => <Letra key={letra} setUsedLetter={props.setUsedLetter} usedLetter={props.usedLetter} letra={letra}/>)}
         </ul>
     );
 }

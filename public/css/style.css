@@ -14,9 +14,11 @@ body {
 
 .hangman-status {
 
-    margin: 80px;
+    margin: 0 auto;
+    padding: 80px;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .hangman-status img {
@@ -25,7 +27,7 @@ body {
     height: 400px;
 }
 
-.start-game button {
+.start-game {
 
     width: 225px;
     height: 60px;
@@ -36,6 +38,17 @@ body {
     font-weight: 700;
     font-size: 20px;
     cursor: pointer;
+    position: absolute;
+    right: 5%;
+}
+
+.guess-word {
+
+    position: absolute;
+    font-size: 50px;
+    font-weight: 700;
+    bottom: 10%;
+    right: 5%;
 }
 
 .keyboard {
