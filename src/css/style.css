@@ -47,6 +47,7 @@ body {
     position: absolute;
     font-size: 50px;
     font-weight: 700;
+    letter-spacing: 10px;
     bottom: 10%;
     right: 5%;
 }
