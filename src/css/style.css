@@ -85,10 +85,16 @@ body {
 
 .disabled {
 
-    background: #9FAAB5;
+    background: #a9aeb2;
     border: 1px solid #4F779E;
     color: #4F779E;
     cursor: not-allowed;
+}
+
+.disabled:hover {
+
+    background: #99a3ad;
+    color: #4776a4;
 }
 
 .win {
@@ -99,4 +105,37 @@ body {
 .game-over {
 
     color: #FF0000;
+}
+
+@media (max-width: 800px) {
+
+    .hangman-status {
+        padding-bottom: 160px;
+        justify-content: center;
+    }
+
+    .hangman-status img {
+
+        width: 300px;
+        height: 300px;
+    }
+    
+    .start-game {
+        bottom: 60px;
+        left: auto;
+        right: auto;
+    }
+    
+    .guess-word {
+        font-size: 36px;
+        bottom: 0;
+        left: auto;
+        right: auto;
+    }
+
+    .keyboard {
+
+        width: 80%;
+        padding: 40px 0;
+    }
 }
