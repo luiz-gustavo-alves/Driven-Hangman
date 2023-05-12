@@ -49,8 +49,8 @@ export default function App() {
             setHangmanStatus(hangmanStatus + 1);
 
             if (hangmanStatus === 5) {
-                setUsedLetters([...alfabeto]);
                 setGameStatus("game-over");
+                setUsedLetters([...alfabeto]);
             }
         }
     }
@@ -67,7 +67,7 @@ export default function App() {
     return (
         <>
             <Jogo startGame={startGame} parseGuessWord={parseGuessWord} hangmanStatus={hangmanStatus} gameStatus={gameStatus} />
-            <Letras getUsedLetters={getUsedLetters} usedLetters={usedLetters} />
+            <Letras getUsedLetters={getUsedLetters}  usedLetters={usedLetters} gameStatus={gameStatus}/>
         </>
     );
 }

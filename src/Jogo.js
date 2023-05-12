@@ -8,9 +8,9 @@ export default function Jogo(props) {
 
     return (
         <div className="hangman-status">
-            <img src={hangmanImagePath} alt={hangmanStatus}/>
-            <button type="button" className="start-game" onClick={startGame}>Escolher Palavra</button>
-            <h1 className={guessWordClass}>{guessWord}</h1>
+            <img data-test="game-image" src={hangmanImagePath} alt={hangmanStatus}/>
+            <button data-test="choose-word" type="button" className="start-game" onClick={startGame}>Escolher Palavra</button>
+            <h1 data-test="word" className={guessWordClass}>{guessWord}</h1>
         </div>
     );
 }

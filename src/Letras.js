@@ -1,20 +1,28 @@
 function Letra(props) {
     
-    const {letra, getUsedLetters, usedLetters} = props;
+    const {letra, getUsedLetters, usedLetters, gameStatus} = props;
 
-    const isDisabled = usedLetters.includes(letra) ? true : false;
-    const keyClass = isDisabled ? "key disabled" : "key";
+    let isDisabled;
+    let keyClass;
+
+    if (gameStatus === ("win" || "game-over")) {
+        isDisabled = true;
+        keyClass = "key disabled";
+    } else {
+        isDisabled = usedLetters.includes(letra) ? true : false;
+        keyClass = isDisabled ? "key disabled" : "key";
+    }
 
     return (
         <li>
-            <button type="button" className={keyClass} disabled={isDisabled} onClick={() => getUsedLetters(letra)}>{letra}</button>
+            <button data-test="letter" type="button" className={keyClass} disabled={isDisabled} onClick={() => getUsedLetters(letra)}>{letra}</button>
         </li>
     );
 }
 
 export default function Letras(props) {
 
-    const {getUsedLetters, usedLetters} = props;
+    const {getUsedLetters, usedLetters, gameStatus} = props;
 
     const alfabeto = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
@@ -23,7 +31,7 @@ export default function Letras(props) {
 
     return (
         <ul className="keyboard">
-            {alfabeto.map(letra => <Letra key={letra} letra={letra} getUsedLetters={getUsedLetters} usedLetters={usedLetters} />)}
+            {alfabeto.map(letra => <Letra key={letra} letra={letra} getUsedLetters={getUsedLetters} usedLetters={usedLetters} gameStatus={gameStatus} />)}
         </ul>
     );
 }
