@@ -90,3 +90,13 @@ body {
     color: #4F779E;
     cursor: not-allowed;
 }
+
+.win {
+
+    color: #27AE60;
+}
+
+.game-over {
+
+    color: #FF0000;
+}
