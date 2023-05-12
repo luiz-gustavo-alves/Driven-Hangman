@@ -111,11 +111,14 @@ body {
     height: 40px;
     font-size: 18px;
     border: 1px solid #d3d3d3;
+    outline: none;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .input-disabled {
 
+    border: 1px solid #4F779E;
+    background: #acb1b6;
     cursor: not-allowed;
 }
 

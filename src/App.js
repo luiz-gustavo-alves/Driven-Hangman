@@ -15,15 +15,15 @@ function getRandomWord(palavras) {
 export default function App() {
 
     const alfabeto = [
-        "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+        "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
         "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
     ];
 
     const [word, setWord] = useState("");
     const [hangmanStatus, setHangmanStatus] = useState(0);
     const [usedLetters, setUsedLetters] = useState([...alfabeto]);
-    const [gameStatus, setGameStatus] = useState("game-over");
     const [guessValue, setGuessValue] = useState("");
+    const [gameStatus, setGameStatus] = useState("game-over");
 
     function parseGuessWord() {
 
@@ -37,7 +37,7 @@ export default function App() {
         }
         return guessWord;
     }
-    
+
     function getUsedLetters(letter) {
 
         const currentUsedLetters = [...usedLetters, letter];
@@ -57,15 +57,12 @@ export default function App() {
         }
     }
 
-    function checkGuessValue(event) {
-
-        event.preventDefault();
+    function checkGuessValue() {
 
         if (guessValue.toLowerCase() === word) {
             setGameStatus("win");
             setUsedLetters(guessValue.toLowerCase());
-        }
-        else {
+        } else {
             setGameStatus("game-over");
             setUsedLetters([...alfabeto]);
             setHangmanStatus(6);
@@ -78,8 +75,8 @@ export default function App() {
         setWord(word);
         setHangmanStatus(0);
         setUsedLetters([]);
-        setGameStatus("playing");
         setGuessValue("");
+        setGameStatus("playing");
     }
 
     return (
