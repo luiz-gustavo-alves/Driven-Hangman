@@ -4,6 +4,11 @@ import Letras from "./Letras";
 import Chute from "./Chute";
 import palavras from "./palavras";
 
+/* Removes special characters */
+function normalizeWord(word) {
+    return word.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+}
+
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -29,7 +34,7 @@ export default function App() {
 
         let guessWord = "";
         for (let i = 0; i < word.length; i++) {
-            guessWord += usedLetters.includes(word[i]) ? word[i] : "_";
+            guessWord += usedLetters.includes(normalizeWord(word[i])) ? word[i] : "_";
         }
 
         if (!guessWord.includes("_") && hangmanStatus < 6) {
@@ -47,7 +52,9 @@ export default function App() {
 
     function checkGuessWord(usedLetters) {
 
-        if (!word.includes(usedLetters[usedLetters.length - 1])) {
+        const lastUsedLetter = usedLetters[usedLetters.length - 1];
+
+        if (!normalizeWord(word).includes(lastUsedLetter)) {
             setHangmanStatus(hangmanStatus + 1);
 
             if (hangmanStatus === 5) {
@@ -61,7 +68,7 @@ export default function App() {
 
         if (guessValue.toLowerCase() === word) {
             setGameStatus("win");
-            setUsedLetters(guessValue.toLowerCase());
+            setUsedLetters(normalizeWord(guessValue).toLowerCase());
         } else {
             setGameStatus("game-over");
             setUsedLetters([...alfabeto]);
