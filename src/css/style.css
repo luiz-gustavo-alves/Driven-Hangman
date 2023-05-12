@@ -54,6 +54,7 @@ body {
 
 .keyboard {
     
+    padding: 40px 0;
     width: 650px;
     display: flex;
     flex-wrap: wrap;
@@ -79,6 +80,63 @@ body {
 
 .key:hover {
     
+    color: #9ab2c3;
+    background: #e6ebef;
+}
+
+.guesstimate {
+
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.guesstimate h2 {
+
+    font-size: 20px;
+}
+
+.guesstimate form {
+
+    display: flex;
+    gap: 15px;
+}
+
+.text-input {
+
+    padding: 8px;
+    width: 350px;
+    height: 40px;
+    font-size: 18px;
+    border: 1px solid #d3d3d3;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.input-disabled {
+
+    cursor: not-allowed;
+}
+
+.submit-button {
+
+    width: 90px;
+    height: 40px;  
+    font-weight: 700;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #E1ECF4;
+    border: 1px solid #7AA7C7;
+    color: #7AA7C7;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.submit-input:hover {
+
     color: #9ab2c3;
     background: #e6ebef;
 }
@@ -110,6 +168,7 @@ body {
 @media (max-width: 800px) {
 
     .hangman-status {
+
         padding-bottom: 160px;
         justify-content: center;
     }
@@ -121,12 +180,14 @@ body {
     }
     
     .start-game {
+
         bottom: 60px;
         left: auto;
         right: auto;
     }
     
     .guess-word {
+
         font-size: 36px;
         bottom: 0;
         left: auto;
@@ -136,6 +197,21 @@ body {
     .keyboard {
 
         width: 80%;
-        padding: 40px 0;
+    }
+
+    .guesstimate {
+
+        flex-direction: column;
+    }
+
+    .guesstimate form {
+
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-input {
+
+        width: 280px;
     }
 }

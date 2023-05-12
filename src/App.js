@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Jogo from "./Jogo";
 import Letras from "./Letras";
+import Chute from "./Chute";
 import palavras from "./palavras";
 
 function randomInt(min, max) {
@@ -14,14 +15,15 @@ function getRandomWord(palavras) {
 export default function App() {
 
     const alfabeto = [
-        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-        "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+        "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+        "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
     ];
 
     const [word, setWord] = useState("");
     const [hangmanStatus, setHangmanStatus] = useState(0);
     const [usedLetters, setUsedLetters] = useState([...alfabeto]);
     const [gameStatus, setGameStatus] = useState("game-over");
+    const [guessValue, setGuessValue] = useState("");
 
     function parseGuessWord() {
 
@@ -55,19 +57,36 @@ export default function App() {
         }
     }
 
+    function checkGuessValue(event) {
+
+        event.preventDefault();
+
+        if (guessValue.toLowerCase() === word) {
+            setGameStatus("win");
+            setUsedLetters(guessValue.toLowerCase());
+        }
+        else {
+            setGameStatus("game-over");
+            setUsedLetters([...alfabeto]);
+            setHangmanStatus(6);
+        }
+    }
+
     function startGame() {
 
         const word = getRandomWord(palavras);
-        setWord(word.toUpperCase());
+        setWord(word);
         setHangmanStatus(0);
         setUsedLetters([]);
         setGameStatus("playing");
+        setGuessValue("");
     }
 
     return (
         <>
             <Jogo startGame={startGame} parseGuessWord={parseGuessWord} hangmanStatus={hangmanStatus} gameStatus={gameStatus} />
-            <Letras getUsedLetters={getUsedLetters}  usedLetters={usedLetters} gameStatus={gameStatus}/>
+            <Letras getUsedLetters={getUsedLetters}  usedLetters={usedLetters} gameStatus={gameStatus} />
+            <Chute setGuessValue={setGuessValue} checkGuessValue={checkGuessValue} guessValue={guessValue} gameStatus={gameStatus} />
         </>
     );
 }
