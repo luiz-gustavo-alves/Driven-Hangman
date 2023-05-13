@@ -1,9 +1,7 @@
-import parseSpecialChar from "./utils";
-
 export default function Chute(props) {
 
-    const {setNewGameState, game} = props;
-    const {word, guessValue, gameStatus} = game;
+    const {setNewGameState, parseSpecialChar, gameState} = props;
+    const {word, guessValue, gameStatus} = gameState;
 
     function handleChange(event) {
 
@@ -15,7 +13,7 @@ export default function Chute(props) {
 
         const parsedGuessValue = parseSpecialChar(guessValue);
         let newGameState = {usedLetters: [...parsedGuessValue.toLowerCase()]};
-    
+
         if (guessValue.toLowerCase() === word) {
             newGameState = Object.assign(newGameState, {
                 gameStatus: "win",

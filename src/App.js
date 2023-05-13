@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState } from "react"
 
-import Jogo from "./Jogo";
-import Letras from "./Letras";
-import Chute from "./Chute";
+import Jogo from "./Jogo"
+import Letras from "./Letras"
+import Chute from "./Chute"
+
+/* Replaces special characters into normal characters */
+function parseSpecialChar(word) {
+    return word.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+}
 
 export default function App() {
 
@@ -11,7 +16,7 @@ export default function App() {
         "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
     ];
 
-    const [game, setGame] = useState({
+    const [gameState, setGameState] = useState({
         word: "",
         hangmanStatus: 0,
         usedLetters: [],
@@ -21,7 +26,7 @@ export default function App() {
 
     function setNewGameState(newGameState) {
 
-        setGame(game => ({
+        setGameState(game => ({
             ...game,
             ...newGameState
         }));
@@ -29,9 +34,22 @@ export default function App() {
 
     return (
         <>
-            <Jogo setNewGameState={setNewGameState} game={game} />
-            <Letras setNewGameState={setNewGameState} alfabeto={alfabeto} game={game} />
-            <Chute setNewGameState={setNewGameState} game={game} />
+            <Jogo 
+                setNewGameState={setNewGameState} 
+                parseSpecialChar={parseSpecialChar} 
+                gameState={gameState} 
+            />
+            <Letras 
+                setNewGameState={setNewGameState} 
+                parseSpecialChar={parseSpecialChar} 
+                alfabeto={alfabeto} 
+                gameState={gameState} 
+            />
+            <Chute 
+                setNewGameState={setNewGameState}  
+                parseSpecialChar={parseSpecialChar} 
+                gameState={gameState} 
+            />
         </>
     );
 }

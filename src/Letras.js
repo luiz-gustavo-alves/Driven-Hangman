@@ -1,15 +1,14 @@
-import parseSpecialChar from "./utils";
-
 function Letra(props) {
-    
-    const {letra, setNewGameState, game} = props;
-    const {word, hangmanStatus, usedLetters, gameStatus} = game;
 
-    function checkGuessWord(usedLetters) {
+    const {letra, setNewGameState, parseSpecialChar, gameState} = props;
+    const {word, hangmanStatus, usedLetters, gameStatus} = gameState;
 
-        let newGameState = {usedLetters: usedLetters};
+    function checkGuessWord(currentUsedLetters) {
+
+        let newGameState = {usedLetters: currentUsedLetters};
+
         const parsedWord = parseSpecialChar(word);
-        const lastUsedLetter = usedLetters[usedLetters.length - 1];
+        const lastUsedLetter = currentUsedLetters[currentUsedLetters.length - 1];
 
         if (!parsedWord.includes(lastUsedLetter)) {
             newGameState = Object.assign(newGameState, {
@@ -42,11 +41,11 @@ function Letra(props) {
 
     return (
         <li>
-            <button 
-                data-test="letter" 
-                type="button" 
-                className={keyClass} 
-                disabled={isDisabled} 
+            <button
+                data-test="letter"
+                type="button"
+                className={keyClass}
+                disabled={isDisabled}
                 onClick={() => getUsedLetters(letra)}
             >{letra}</button>
         </li>
@@ -55,7 +54,7 @@ function Letra(props) {
 
 export default function Letras(props) {
 
-    const {setNewGameState, alfabeto, game} = props;
+    const {setNewGameState, parseSpecialChar, alfabeto, gameState} = props;
 
     return (
         <ul className="keyboard">
@@ -63,7 +62,8 @@ export default function Letras(props) {
                 key={letra}
                 letra={letra}
                 setNewGameState={setNewGameState}
-                game={game}
+                parseSpecialChar={parseSpecialChar}
+                gameState={gameState}
             />)}
         </ul>
     );

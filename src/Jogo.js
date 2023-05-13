@@ -1,5 +1,4 @@
-import palavras from "./palavras";
-import parseSpecialChar from "./utils";
+import palavras from "./palavras"
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1));
@@ -11,14 +10,14 @@ function getRandomWord(palavras) {
 
 export default function Jogo(props) {
 
-    const {setNewGameState, game} = props;
-    const {word, hangmanStatus, usedLetters, gameStatus} = game;
+    const {setNewGameState, parseSpecialChar, gameState} = props;
+    const {word, hangmanStatus, usedLetters, gameStatus} = gameState;
 
     function startGame() {
 
-        const word = getRandomWord(palavras);
+        const randomWord = getRandomWord(palavras);
         const newGameState = {
-            word: word,
+            word: randomWord,
             hangmanStatus: 0,
             usedLetters: [],
             guessValue: "",
