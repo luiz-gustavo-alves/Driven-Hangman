@@ -1,13 +1,35 @@
+import parseSpecialChar from "./utils";
+
 export default function Chute(props) {
 
-    const {setGuessValue, checkGuessValue, guessValue, gameStatus} = props;
+    const {setNewGameState, game} = props;
+    const {word, guessValue, gameStatus} = game;
 
     function handleChange(event) {
-        setGuessValue(event.target.value);
+
+        const newGameState = {guessValue: event.target.value};
+        setNewGameState(newGameState);
+    }
+
+    function checkGuessValue() {
+
+        const parsedGuessValue = parseSpecialChar(guessValue);
+        let newGameState = {usedLetters: [...parsedGuessValue.toLowerCase()]};
+    
+        if (guessValue.toLowerCase() === word) {
+            newGameState = Object.assign(newGameState, {
+                gameStatus: "win",
+            });
+        } else {
+            newGameState = Object.assign(newGameState, {
+                gameStatus: "game-over",
+                hangmanStatus: 6
+            });
+        }
+        setNewGameState(newGameState);
     }
 
     let isDisabled;
-
     if (gameStatus === "win" || gameStatus === "game-over") {
         isDisabled = true;
     } else {
@@ -21,8 +43,20 @@ export default function Chute(props) {
         <div className="guesstimate">
             <h2>Já sei a palavra!</h2>
             <form>
-                <input data-test="guess-input" className={textInputClass} type="text" value={guessValue} disabled={isDisabled} onChange={handleChange} ></input>
-                <button data-test="guess-button" className={submitButtonClass} type="submit" disabled={isDisabled} onClick={checkGuessValue}>Chutar</button>
+                <input
+                    data-test="guess-input"
+                    className={textInputClass}
+                    type="text" value={guessValue}
+                    disabled={isDisabled}
+                    onChange={handleChange}
+                ></input>
+                <button
+                    data-test="guess-button"
+                    className={submitButtonClass}
+                    type="submit"
+                    disabled={isDisabled}
+                    onClick={checkGuessValue}
+                >Chutar</button>
             </form>
         </div>
     );
