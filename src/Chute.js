@@ -1,3 +1,5 @@
+import { InputContainer, InputContent, SubmitContent } from "./styles/chute";
+
 export default function Chute(props) {
 
     const {setNewGameState, parseSpecialChar, gameState} = props;
@@ -27,35 +29,34 @@ export default function Chute(props) {
         setNewGameState(newGameState);
     }
 
-    let isDisabled;
-    if (gameStatus === "win" || gameStatus === "game-over") {
-        isDisabled = true;
-    } else {
-        isDisabled = false;
+    function checkDisabledInput() {
+        
+        if (gameStatus === "win" || gameStatus === "game-over") return true;
+        return false;
     }
 
-    const textInputClass = isDisabled ? "text-input input-disabled" : "text-input";
-    const submitButtonClass = isDisabled ? "submit-button disabled" : "submit-button";
+    const isDisabled = checkDisabledInput();
+    const placeholderInputText = isDisabled ? guessValue : "Digite a palavra...";
 
     return (
-        <div className="guesstimate">
+        <InputContainer>
             <h2>Já sei a palavra!</h2>
             <form>
-                <input
+                <InputContent
                     data-test="guess-input"
-                    className={textInputClass}
-                    type="text" value={guessValue}
+                    type="text"
+                    placeholder={placeholderInputText}
+                    value={guessValue}
                     disabled={isDisabled}
                     onChange={handleChange}
-                ></input>
-                <button
+                ></InputContent>
+                <SubmitContent
                     data-test="guess-button"
-                    className={submitButtonClass}
                     type="submit"
                     disabled={isDisabled}
                     onClick={checkGuessValue}
-                >Chutar</button>
+                >Chutar</SubmitContent>
             </form>
-        </div>
+        </InputContainer>
     );
 }

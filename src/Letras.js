@@ -1,3 +1,5 @@
+import { Keyboard, Key } from "./styles/letras"
+
 function Letra(props) {
 
     const {letra, setNewGameState, parseSpecialChar, gameState} = props;
@@ -30,24 +32,24 @@ function Letra(props) {
         checkGuessWord(currentUsedLetters);
     }
 
-    let isDisabled, keyClass;
-    if (gameStatus === "win" || gameStatus === "game-over") {
-        isDisabled = true;
-        keyClass = "key disabled";
-    } else {
-        isDisabled = usedLetters.includes(letra) ? true : false;
-        keyClass = isDisabled ? "key disabled" : "key";
+    function checkDisabledKey(letra) {
+
+        if (gameStatus === "win" || gameStatus === "game-over") return true;
+        else {
+            return usedLetters.includes(letra) ? true : false;
+        }
     }
+
+    const isDisabled = checkDisabledKey(letra);
 
     return (
         <li>
-            <button
+            <Key
                 data-test="letter"
                 type="button"
-                className={keyClass}
                 disabled={isDisabled}
                 onClick={() => getUsedLetters(letra)}
-            >{letra}</button>
+            >{letra}</Key>
         </li>
     );
 }
@@ -57,14 +59,15 @@ export default function Letras(props) {
     const {setNewGameState, parseSpecialChar, alfabeto, gameState} = props;
 
     return (
-        <ul className="keyboard">
-            {alfabeto.map(letra => <Letra
+        <Keyboard>
+            {alfabeto.map(letra => 
+            <Letra
                 key={letra}
                 letra={letra}
                 setNewGameState={setNewGameState}
                 parseSpecialChar={parseSpecialChar}
                 gameState={gameState}
             />)}
-        </ul>
+        </Keyboard>
     );
 }

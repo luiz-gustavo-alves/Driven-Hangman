@@ -1,4 +1,5 @@
-import palavras from "./palavras"
+import { HangmanContent, GuessWord } from "./styles/jogo";
+import palavras from "./palavras";
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1));
@@ -44,21 +45,27 @@ export default function Jogo(props) {
         return guessWord;
     }
 
+    function selectGuessWordColor() {
+
+        if (gameStatus === "win") return "#27AE60";
+        if (gameStatus === "game-over") return "#FF0000";
+        return "#000000";
+    }
+
     const guessWord = parseGuessWord();
-    const guessWordClass = `guess-word ${gameStatus}`;
+    const guessWordColor = selectGuessWordColor();
     const hangmanImagePath = `./assets/forca${hangmanStatus}.png`;
 
     return (
-        <div className="hangman-status">
+        <HangmanContent>
             <img data-test="game-image" src={hangmanImagePath} alt={hangmanStatus}/>
             <button
                 data-test="choose-word"
                 type="button"
-                className="start-game"
                 onClick={startGame}
                 >Escolher Palavra
             </button>
-            <h1 data-test="word" className={guessWordClass}>{guessWord}</h1>
-        </div>
+            <GuessWord data-test="word" guessWordColor={guessWordColor}>{guessWord}</GuessWord>
+        </HangmanContent>
     );
 }
