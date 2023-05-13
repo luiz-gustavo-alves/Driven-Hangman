@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Jogo from "./Jogo";
-import Letras from "./Letras";
-import Chute from "./Chute";
+import Jogo from "./components/Jogo";
+import Letras from "./components/Letras";
+import Chute from "./components/Chute";
 
 /* Replaces special characters into normal characters */
 function parseSpecialChar(word) {

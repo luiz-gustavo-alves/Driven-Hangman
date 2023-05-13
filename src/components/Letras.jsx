@@ -1,4 +1,4 @@
-import { Keyboard, Key } from "./styles/letras"
+import { Keyboard, Key } from "./styles/letras";
 
 function Letra(props) {
 

@@ -1,5 +1,5 @@
 import { HangmanContent, GuessWord } from "./styles/jogo";
-import palavras from "./palavras";
+import palavras from "../palavras";
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1));
